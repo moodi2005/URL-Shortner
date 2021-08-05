@@ -7,15 +7,15 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", servehomePage)
+	http.HandleFunc("/", homePage)
 	http.HandleFunc("/shortened", shortened)
-	err := http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe(":5500", nil)
 	if err != nil {
 		panic(err)
 	}
 }
 
-func servehomePage(w http.ResponseWriter, r *http.Request) {
+func homePage(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "../UI/Html/index.html")
 }
 
