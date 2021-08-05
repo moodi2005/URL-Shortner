@@ -1,8 +1,8 @@
-# URL-Shortner
+# URL-Shortener
 
-Simple and free url shortner!
+Simple and free URL-Shortener!
 
-## A project to troubleshoot other link shortening sites:
+## Project without the problems of other URL-Shortener
 
 The purpose of this project is not to make money, so many user problems will be reduced!
 
@@ -14,5 +14,6 @@ The purpose of this project is not to make money, so many user problems will be 
 * Hight speed
 * Click counter
 * Open source
+
 
 We are waiting for your participation!
