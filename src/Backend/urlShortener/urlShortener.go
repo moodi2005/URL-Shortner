@@ -16,8 +16,10 @@ type Link struct {
 	NumberOfClick         uint
 	ShowNumberOfClickLink string
 	IP                    string
-	// TODO get user information if logined
+	UserID                int
 }
+
+var link Link
 
 var charset []rune = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789")
 
@@ -33,42 +35,10 @@ func getNotShortenedLink(w http.ResponseWriter, r *http.Request, link *Link) err
 
 func generateRandomLink(link *Link) {
 
-	// generate ShowNumberOfClickLink
-	for {
-		// create random string
-		randomString := makeRandomString(4)
+	// generate ShowNumberOfClickLink, ShortenedLink
+	link.ShortenedLink = makeRandomString(4)
+	link.ShowNumberOfClickLink = makeRandomString(6)
 
-		// if exists in db, repeat the loop
-		// else  save in link.ShortenedLink
-		if checkLinkExists(randomString, "ShortenedLink") {
-			link.ShortenedLink = randomString
-			break
-		}
-
-	}
-
-	// generate ShowNumberOfClickLink
-	for {
-		// create random string
-		randomString := makeRandomString(6)
-
-		// if exists in db, repeat the loop
-		// else  save in link.ShowNumberOfClickLink
-		if checkLinkExists(randomString, "ShowNumberOfClickLink") {
-			link.ShowNumberOfClickLink = randomString
-			break
-		}
-
-	}
-
-}
-
-// check db for exists link string
-func checkLinkExists(link string, field string) bool {
-	// TODO
-	_ = link
-	_ = field
-	return true
 }
 
 // get ip from header
@@ -89,21 +59,35 @@ func makeRandomString(randomStringLen int) string {
 	return string(randomString)
 }
 
-func UrlShortener(w http.ResponseWriter, r *http.Request) {
-	var link Link
+// save link items by other function
+// and return for save in database in other package
+
+func UrlShortener(w http.ResponseWriter, r *http.Request) (Link, error) {
 
 	// 1. get and save link.NotShortenedLink
 	if err := getNotShortenedLink(w, r, &link); err != nil {
-		fmt.Println(err)
+		return Link{}, fmt.Errorf("error in get shortened link from input: %s", err)
 	}
-
-	// 2. gnrate random string for shortened link and check not exists
-	// and save in link.ShortenedLink
-	// 3. generate ShowNumberOfClickLink and save to link.ShowNumberOfClickLink
-	generateRandomLink(&link)
-
-	// 4.get user IP
+	// 2.get user IP
 	getuserIP(r, &link)
 
-	fmt.Println(link)
+	// 3. get user id
+	//TODO
+
+	// 4. genrate random string for shortened link
+	// and save in link.ShortenedLink
+	// 5. generate ShowNumberOfClickLink and save to link.ShowNumberOfClickLink
+	generateRandomLink(&link)
+
+	return link, nil
+}
+
+// genrate random string for shortened link and show number of click link in it is not unique
+func GenerateRandomLinkAgain() Link {
+	// 4. genrate random string for shortened link again
+	// and save in link.ShortenedLink
+	// 35. generate ShowNumberOfClickLink and save to link.ShowNumberOfClickLink again
+	generateRandomLink(&link)
+
+	return link
 }
