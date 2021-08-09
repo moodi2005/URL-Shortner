@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"math/rand"
 	"net/http"
+	"time"
 )
 
 type Link struct {
@@ -19,9 +20,12 @@ type Link struct {
 	UserID                int
 }
 
+// link data save in this var
 var link Link
-
-var charset []rune = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789")
+// for create random string
+const charset string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789"
+// for create random string
+var seededRand *rand.Rand = rand.New(rand.NewSource(time.Now().UnixNano()))
 
 // get not shortened link from input name=="notshortenedlink"
 func getNotShortenedLink(w http.ResponseWriter, r *http.Request, link *Link) error {
@@ -52,16 +56,15 @@ func getuserIP(r *http.Request, link *Link) {
 
 // return randon string
 func makeRandomString(randomStringLen int) string {
-	randomString := make([]rune, randomStringLen)
+	randomString := make([]byte, randomStringLen)
 	for i := range randomString {
-		randomString[i] = charset[rand.Intn(len(charset))]
+		randomString[i] = charset[seededRand.Intn(len(charset))]
 	}
 	return string(randomString)
 }
 
-// save link items by other function
+// save link items by call other function
 // and return for save in database in other package
-
 func UrlShortener(w http.ResponseWriter, r *http.Request) (Link, error) {
 
 	// 1. get and save link.NotShortenedLink

@@ -7,7 +7,7 @@ import (
 	"os"
 
 	"github.com/amir-mhmd-najafi/URL-Shortner/database"
-	databaseconfig "github.com/amir-mhmd-najafi/URL-Shortner/database/databaseConfig"
+	"github.com/amir-mhmd-najafi/URL-Shortner/database/databaseconfig"
 	"github.com/amir-mhmd-najafi/URL-Shortner/urlshortener"
 	"github.com/lib/pq"
 )
@@ -32,19 +32,22 @@ func main() {
 	}
 }
 
+// home page => input for link => shortened link
 func homePage(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "../UI/Html/index.html")
 }
 
 func shortened(w http.ResponseWriter, r *http.Request) {
-	
+
 	// get link struct with data about link
 	link, err := urlshortener.UrlShortener(w, r)
 	if err != nil {
 		fmt.Println(err)
+		return
 	}
 	if err = database.SaveSpecifiedLinkInDatabase(link, DB); err != nil {
 		fmt.Println(err)
+		return
 	}
 
 	// save random link data in database
@@ -57,6 +60,7 @@ func shortened(w http.ResponseWriter, r *http.Request) {
 				continue
 			}
 			fmt.Println(err)
+			return
 		}
 		break
 	}
