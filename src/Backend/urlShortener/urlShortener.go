@@ -22,8 +22,10 @@ type Link struct {
 
 // link data save in this var
 var link Link
+
 // for create random string
 const charset string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789"
+
 // for create random string
 var seededRand *rand.Rand = rand.New(rand.NewSource(time.Now().UnixNano()))
 
