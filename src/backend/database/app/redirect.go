@@ -25,7 +25,7 @@ func Redirect(w http.ResponseWriter, r *http.Request, DB *sql.DB) {
 
 // show home page
 func home(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "../UI/Html/index.html")
+	http.ServeFile(w, r, "../ui//html/index.html")
 }
 
 // redirect to notShortened link

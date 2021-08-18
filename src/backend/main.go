@@ -19,12 +19,14 @@ func init() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
+	fmt.Println("end init")
 }
 
 func main() {
 	http.HandleFunc("/", homePage)
 	http.HandleFunc("/shortened", shortened)
 	err := http.ListenAndServe(":5500", nil)
+	fmt.Println("Started")
 	if err != nil {
 		panic(err)
 	}
