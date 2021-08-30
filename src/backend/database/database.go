@@ -13,7 +13,7 @@ import (
 // save link data in databse
 func SaveLinkInDatabase(linkData urlshortener.Link, DB *sql.DB) error {
 
-	dbCommand := fmt.Sprintf(`INSERT INTO urlshortened (shortenedlink, shownumberofclicklink, notshortenedlink, numberofclick, ip, userid) VALUES ('%s','%s','%s', %d, '%s', %d);`,
+	dbCommand := fmt.Sprintf(`INSERT INTO urlshortened (ShortenedLink, ShowNumberOfClickLink, NotShortenedLink, NumberOfClick, IP, UserID) VALUES ('%s','%s','%s', %d, '%s', %d);`,
 		linkData.ShortenedLink, linkData.ShowNumberOfClickLink, linkData.NotShortenedLink, linkData.NumberOfClick, linkData.IP, linkData.UserID)
 	_, err := DB.Exec(dbCommand)
 	if err != nil {
@@ -33,4 +33,16 @@ func CheckExistsLink(want string, have string, value string, DB *sql.DB) (string
 		return "", err
 	}
 	return result, nil
+}
+
+// add 1 in link click count
+func UpdateLinkCount(link string, DB *sql.DB) error {
+	dbCommand := fmt.Sprintf(`UPDATE urlshortened SET NumberOfClick = NumberOfClick + 1 WHERE ShortenedLink = '%s';`, 
+link)
+_, err := DB.Exec(dbCommand)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

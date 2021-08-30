@@ -31,7 +31,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 
 // redirect to notShortened link
 func urlShortened(w http.ResponseWriter, r *http.Request, DB *sql.DB, URL string) {
-	LongURL, err := database.CheckExistsLink("notshortenedlink" ,"shortenedlink",URL, DB)
+	LongURL, err := database.CheckExistsLink("NotShortenedLink" ,"ShortenedLink",URL, DB)
 	// if not exists
 	if LongURL == "" {
 		page404(w, r)
@@ -41,6 +41,13 @@ func urlShortened(w http.ResponseWriter, r *http.Request, DB *sql.DB, URL string
 		fmt.Println(err)
 		return
 	}
+
+	err = database.UpdateLinkCount(URL, DB)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
 	http.Redirect(w, r, LongURL, http.StatusFound)
 }
 
