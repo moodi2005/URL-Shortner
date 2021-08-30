@@ -12,6 +12,13 @@ import (
 
 func Shortner(w http.ResponseWriter, r *http.Request, DB *sql.DB) {
 
+	// check post methd
+	// if other method => redirect to home
+	if r.Method != "POST" {
+		http.Redirect(w, r, "/", http.StatusForbidden)
+		return
+	}
+
 	link, err := urlshortener.UrlShortener(w, r)
 	// get link struct with data about link
 	if err != nil {
