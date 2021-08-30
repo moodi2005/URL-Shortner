@@ -26,7 +26,6 @@ func main() {
 	http.HandleFunc("/", homePage)
 	http.HandleFunc("/shortened", shortened)
 	err := http.ListenAndServe(":5500", nil)
-	fmt.Println("Started")
 	if err != nil {
 		panic(err)
 	}
@@ -37,6 +36,7 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 	app.Redirect(w, r, DB)
 }
 
+// show counter link and other data
 func shortened(w http.ResponseWriter, r *http.Request) {
 	app.Shortner(w, r, DB)
 }

@@ -24,9 +24,9 @@ func SaveLinkInDatabase(linkData urlshortener.Link, DB *sql.DB) error {
 }
 
 // check link exists and return long link
-func CheckExistsLink(value string, DB *sql.DB) (string, error) {
-	dbCommand := fmt.Sprintf(`SELECT notshortenedlink FROM urlshortened WHERE shortenedlink = '%s';`,
-		value)
+func CheckExistsLink(want string, have string, value string, DB *sql.DB) (string, error) {
+	dbCommand := fmt.Sprintf(`SELECT %s FROM urlshortened WHERE %s = '%s';`,
+		want, have, value)
 	var result string
 	err := DB.QueryRow(dbCommand).Scan(&result)
 	if err != nil {

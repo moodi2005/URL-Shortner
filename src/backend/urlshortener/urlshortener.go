@@ -89,9 +89,10 @@ func UrlShortener(w http.ResponseWriter, r *http.Request) (Link, error) {
 
 // genrate random string for shortened link and show number of click link in it is not unique
 func GenerateRandomLinkAgain() Link {
-	// 4. genrate random string for shortened link again
+	
+	// 1. genrate random string for shortened link again
 	// and save in link.ShortenedLink
-	// 35. generate ShowNumberOfClickLink and save to link.ShowNumberOfClickLink again
+	// 2. generate ShowNumberOfClickLink and save to link.ShowNumberOfClickLink again
 	generateRandomLink(&link)
 
 	return link

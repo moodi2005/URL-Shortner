@@ -15,22 +15,23 @@ func Redirect(w http.ResponseWriter, r *http.Request, DB *sql.DB) {
 	case 4:
 		urlShortened(w, r, DB, URL)
 	case 6:
-		// showLinkStatistics()
+		showLinkStatistics(w, r)
 	case 0:
 		home(w, r)
 	default:
+		fmt.Println("now")
 		page404(w, r)
 	}
 }
 
 // show home page
 func home(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "../ui//html/index.html")
+	http.ServeFile(w, r, "../ui/html/index.html")
 }
 
 // redirect to notShortened link
 func urlShortened(w http.ResponseWriter, r *http.Request, DB *sql.DB, URL string) {
-	LongURL, err := database.CheckExistsLink(URL, DB)
+	LongURL, err := database.CheckExistsLink("notshortenedlink" ,"shortenedlink",URL, DB)
 	// if not exists
 	if LongURL == "" {
 		page404(w, r)
@@ -43,7 +44,11 @@ func urlShortened(w http.ResponseWriter, r *http.Request, DB *sql.DB, URL string
 	http.Redirect(w, r, LongURL, http.StatusFound)
 }
 
+func showLinkStatistics(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "../ui/html/statistic.html")
+}
+
 func page404(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotFound)
-	fmt.Fprint(w, "not found")
+	// w.WriteHeader(http.StatusNotFound)
+	http.ServeFile(w, r, "../ui/html/404.html")
 }

@@ -40,7 +40,6 @@ func Shortner(w http.ResponseWriter, r *http.Request, DB *sql.DB) {
 		}
 		break
 	}
-
 	html := fmt.Sprintf(`http://localhost:5500/%s`, link.ShortenedLink)
 	fmt.Fprint(w, html)
 
