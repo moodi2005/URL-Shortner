@@ -19,14 +19,13 @@ func Redirect(w http.ResponseWriter, r *http.Request, DB *sql.DB) {
 	case 0:
 		home(w, r)
 	default:
-		fmt.Println("now")
 		page404(w, r)
 	}
 }
 
 // show home page
 func home(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "../ui/html/index.html")
+	http.ServeFile(w, r, "../template/html/home.html")
 }
 
 // redirect to notShortened link
@@ -52,10 +51,10 @@ func urlShortened(w http.ResponseWriter, r *http.Request, DB *sql.DB, URL string
 }
 
 func showLinkStatistics(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "../ui/html/statistic.html")
+	http.ServeFile(w, r, "../template/html/stattisic.html")
 }
 
 func page404(w http.ResponseWriter, r *http.Request) {
-	// w.WriteHeader(http.StatusNotFound)
-	http.ServeFile(w, r, "../ui/html/404.html")
+	w.WriteHeader(http.StatusNotFound)
+	http.ServeFile(w, r, "../template/html/404.html")
 }

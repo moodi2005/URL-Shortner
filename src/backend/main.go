@@ -13,7 +13,7 @@ import (
 var DB *sql.DB
 
 func init() {
-	var err error // test!
+	var err error
 	DB, err = databaseconfig.ConnectToDB()
 	if err != nil {
 		fmt.Println(err)
@@ -23,7 +23,12 @@ func init() {
 }
 
 func main() {
-	http.HandleFunc("/", homePage)
+	
+	// static file
+	fs := http.FileServer(http.Dir("../template/statistic"))
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
+
+	http.HandleFunc("/", redirect)
 	http.HandleFunc("/shortened", shortened)
 	err := http.ListenAndServe(":5500", nil)
 	if err != nil {
@@ -32,7 +37,7 @@ func main() {
 }
 
 // home page => input for link => shortened link
-func homePage(w http.ResponseWriter, r *http.Request) {
+func redirect(w http.ResponseWriter, r *http.Request) {
 	app.Redirect(w, r, DB)
 }
 
