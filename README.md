@@ -18,7 +18,7 @@ The purpose of this project is not to make money, so many user problems will be 
 ### TODO
 
 - [x] shortener
-- [ ] link counter
+- [x] link counter
 - [ ] authentication
 - [ ] ui
 - [ ] docker
