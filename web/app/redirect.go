@@ -6,8 +6,11 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/amir-mhmd-najafi/URL-Shortner/database"
+	"github.com/amir-mhmd-najafi/URL-Shortner/internal/database"
 )
+
+// variable
+var htmlDir string = "web/template/html/" // html directory
 
 func Redirect(w http.ResponseWriter, r *http.Request, DB *sql.DB) {
 	URL := strings.TrimPrefix(r.URL.Path, "/")
@@ -25,7 +28,7 @@ func Redirect(w http.ResponseWriter, r *http.Request, DB *sql.DB) {
 
 // show home page
 func home(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "../template/html/home.html")
+	http.ServeFile(w, r, htmlDir + "home.html")
 }
 
 // redirect to notShortened link
@@ -51,10 +54,10 @@ func urlShortened(w http.ResponseWriter, r *http.Request, DB *sql.DB, URL string
 }
 
 func showLinkStatistics(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "../template/html/stattisic.html")
+	http.ServeFile(w, r, htmlDir + "stattisic.html")
 }
 
 func page404(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
-	http.ServeFile(w, r, "../template/html/404.html")
+	http.ServeFile(w, r, htmlDir + "404.html")
 }

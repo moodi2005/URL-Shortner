@@ -5,13 +5,12 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/amir-mhmd-najafi/URL-Shortner/database"
-	"github.com/amir-mhmd-najafi/URL-Shortner/urlshortener"
+	"github.com/amir-mhmd-najafi/URL-Shortner/internal/database"
+	"github.com/amir-mhmd-najafi/URL-Shortner/pkg/urlshortener"
 	"github.com/lib/pq"
 )
 
 func Shortner(w http.ResponseWriter, r *http.Request, DB *sql.DB) {
-
 	// check post methd
 	// if other method => redirect to home
 	if r.Method != "POST" {

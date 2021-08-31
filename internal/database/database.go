@@ -7,12 +7,11 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/amir-mhmd-najafi/URL-Shortner/urlshortener"
+	"github.com/amir-mhmd-najafi/URL-Shortner/pkg/urlshortener"
 )
 
 // save link data in databse
 func SaveLinkInDatabase(linkData urlshortener.Link, DB *sql.DB) error {
-
 	dbCommand := fmt.Sprintf(`INSERT INTO urlshortened (ShortenedLink, ShowNumberOfClickLink, NotShortenedLink, NumberOfClick, IP, UserID) VALUES ('%s','%s','%s', %d, '%s', %d);`,
 		linkData.ShortenedLink, linkData.ShowNumberOfClickLink, linkData.NotShortenedLink, linkData.NumberOfClick, linkData.IP, linkData.UserID)
 	_, err := DB.Exec(dbCommand)

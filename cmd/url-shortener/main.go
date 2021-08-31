@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/amir-mhmd-najafi/URL-Shortner/database/app"
-	"github.com/amir-mhmd-najafi/URL-Shortner/database/databaseconfig"
+	databaseconfig "github.com/amir-mhmd-najafi/URL-Shortner/config/database"
+	"github.com/amir-mhmd-najafi/URL-Shortner/web/app"
 )
 
 var DB *sql.DB
@@ -24,8 +24,8 @@ func init() {
 
 func main() {
 	
-	// static file
-	fs := http.FileServer(http.Dir("../template/statistic"))
+	// static file | css | js
+	fs := http.FileServer(http.Dir("web/template/static/"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	http.HandleFunc("/", redirect)

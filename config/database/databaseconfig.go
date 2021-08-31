@@ -37,7 +37,7 @@ func readConfigFile(fileName string, databaseconfig *databaseConfig) error {
 // and genrate config info string
 func getConfigInfo() (string, error) {
 	var databaseconfig databaseConfig
-	err := readConfigFile("../database/config.yaml", &databaseconfig)
+	err := readConfigFile("config/database/config.yaml", &databaseconfig)
 	if err != nil {
 		return "", err
 	}
