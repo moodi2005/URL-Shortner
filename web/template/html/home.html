@@ -5,31 +5,89 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/home.css">
     <title>URL Shortener</title>
 </head>
 
 <body>
-    <div class="container">
-
-        <header class="header">
-            <div class="logo">LOGO</div>
-            <nav>
-                <a href="#">Home</a>
-                <a href="#">Shortener</a>
-                <a href="#">About us</a>
-                <a href="#">Account</a>
-            </nav>
-        </header>
-
-        <form action="/shortened" method="POST">
-            <input class="inputlink" type="text" placeholder="Enter long link..." name="notshortenedlink" />
-            <button class="buttonlink">Shortener!</button>
-        </form>
-
-    </div>
-    </div>
-
+    <!-- Navigation Start -->
+    <nav>
+        <div class="nav__container">
+            <a href="/" class="nav__item active">
+                <div class="nav__item-box">
+                    <div class="nav__item-icon">
+                        <i class="bx bx-home"></i>
+                    </div>
+                    <div class="nav__item-name">خانه</div>
+                </div>
+            </a>
+            <a href="/" class="nav__item">
+                <div class="nav__item-box">
+                    <div class="nav__item-icon">
+                        <i class="bx bx-home"></i>
+                    </div>
+                    <div class="nav__item-name">خانه</div>
+                </div>
+            </a>
+            <a href="/" class="nav__item">
+                <div class="nav__item-box">
+                    <div class="nav__item-icon">
+                        <i class="bx bx-home"></i>
+                    </div>
+                    <div class="nav__item-name">خانه</div>
+                </div>
+            </a>
+            <div class="nav__item nav__item__dropdown">
+                <div class="nav__item-box">
+                    <div class="nav__item-icon">
+                        <i class="bx bx-home"></i>
+                    </div>
+                    <div class="nav__item-name">زیر مجموعه دار</div>
+                    <div class="nav__item__dropdown-icon">
+                        <i class='bx bxs-right-arrow'></i>
+                    </div>
+                </div>
+                <div class="nav__item-dropdown nav__item__dropdown-dropdown">
+                    <div class="nav__item__dropdown-list">
+                        <a href="/" class="nav__item">
+                            <div class="nav__item-box">
+                                <div class="nav__item-icon">
+                                    <i class="bx bx-home"></i>
+                                </div>
+                                <div class="nav__item-name">خانه</div>
+                            </div>
+                        </a>
+                        <a href="/" class="nav__item">
+                            <div class="nav__item-box">
+                                <div class="nav__item-icon">
+                                    <i class="bx bx-home"></i>
+                                </div>
+                                <div class="nav__item-name">خانه</div>
+                            </div>
+                        </a>
+                        <a href="/" class="nav__item">
+                            <div class="nav__item-box">
+                                <div class="nav__item-icon">
+                                    <i class="bx bx-home"></i>
+                                </div>
+                                <div class="nav__item-name">خانه</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <a href="/" class="nav__item">
+                <div class="nav__item-box">
+                    <div class="nav__item-icon">
+                        <i class="bx bx-home"></i>
+                    </div>
+                    <div class="nav__item-name">خانه</div>
+                </div>
+            </a>
+        </div>
+    </nav>
+    <div class="nav-swiper-area"></div>
+    <!-- Navigation End -->
 </body>
+<script src="/static/dist/script.js"></script>
 
 </html>
