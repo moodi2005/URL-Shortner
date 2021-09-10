@@ -3,5 +3,23 @@
   "version": "1.0.0",
   "repository": "https://github.com/njfamirm/URL-Shortner.git",
   "author": "MohammadMahdi Zamanian <mm25zamanian@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "install": "yarn",
+    "build": "npx webpack",
+    "watch": "yarn build -- -w"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.2.0",
+    "file-loader": "^6.2.0",
+    "sass": "^1.39.2",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^3.2.1",
+    "ts-loader": "^9.2.5",
+    "typescript": "^4.4.2",
+    "webpack": "^5.52.1",
+    "webpack-cli": "^4.8.0",
+    "workbox": "^0.0.0"
+  }
 }
